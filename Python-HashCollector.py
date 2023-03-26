@@ -25,8 +25,11 @@ import hashlib
 def get_files():
 
     path_specified = input("Enter path of file or directory specified: ")
-    return [join(path_specified, f) for f in listdir(path_specified) if isfile(join(path_specified, f))]
+    return [join(path_specified, f) for f in listdir(path_specified) if isfile(join(path_specified, f))] 
 # END of get_files function
+
+
+
 
 # this function will hash every file in the directory and their filename
 def get_hashes():
@@ -37,14 +40,17 @@ def get_hashes():
     list_of_hashes = []
 
     #the for loop will call on every file in the array and repeat the process of hashing the file until theres no more in the array
+    
     for each_file in files:
         hash_md5 = hashlib.md5()  # will hash to md5, weak but first try
         with open(each_file, "rb") as f:
             for chunk in iter(lambda: f.read(4096), b""):
                 hash_md5.update(chunk)
         #this will add the name of the file in the array with their hash
-        list_of_hashes.append('{}\n'.format(basename(each_file), hash_md5.hexdigest()))
-        # this will write append only their hashes to the array 
+        list_of_hashes.append('{}\n'.format(hash_md5.hexdigest()))
+        # this will write append only their hashes to the array
+        
+    print("file has been hashed") 
         
     return list_of_hashes
 # END of get_hashes_filename function
@@ -59,11 +65,13 @@ def write_hashes():
     with open(file_save_path, 'w') as f:
         for md5_hash in hashes:
             f.write(md5_hash)
+            
+    print("Hash Saved")
     
 # END of write_hashes_filenames function
 
 # this line of code is used as to run the code as a script
-#if __name__ == '__main__':
+if __name__ == '__main__':
     write_hashes()
     
 
