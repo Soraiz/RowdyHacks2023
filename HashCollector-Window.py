@@ -23,7 +23,7 @@ class VirusTotal_Window:
         root.geometry("800x800")
 
         button1 = Button(root, text="Scan suspicious file specified", command=self.button1 )
-
+        button1.place(x = 368, y = 714.5 )
 
     def button1(self):
         if self.string.get():
@@ -55,4 +55,4 @@ class VirusTotal_Window:
                 print("Hash Saved")
 
 if __name__ == '__main__':
-    VirusTotal_Window().root.mainloop()
+    VirusTotal_Window().mainloop()
