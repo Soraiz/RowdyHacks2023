@@ -3,29 +3,56 @@
 
 
 from tkinter import *
+import tkinter as tk
+from os import listdir, getcwd
+from os.path import isfile, join, normpath, basename
+import hashlib
 
 
+root=Tk()
 
 class VirusTotal_Window:
-    
-    def __init__(self): 
-        root=Tk()
-    
-        root.Title("HashCollector-Window.py") 
-        
-        frame_big = Frame(root, bg="white", hieght=700, width=700)
-        frame_big.grid()
-        
-        label1 = Label(root, text="Malware Analysis ")
-        label1.pack()
-        
-        button1 = Button(root, text="Scan suspicious hash", command=self.button1)
-        button1.pack() 
-        
-        button2 = Button(root, text="Upload hash file to VirusTotal")
-        button2.pack()
+
+    def task_option(self):
+
+        root = Tk() 
+
+        root.title('HashCollector-Window.py')
+
+        root.minsize(300,300)
+        root.geometry("800x800")
+
+        button1 = Button(root, text="Scan suspicious file specified", command=self.button1 )
 
 
+    def button1(self):
+        if self.string.get():
+            def get_files():
+                path_specified = input("Enter path of file or directory specified: ")
+                return [join(path_specified, f) for f in listdir(path_specified) if isfile(join(path_specified, f))]
+            # END of inner def function 
+            
+            def get_hashes():
+                files = get_files()
+                list_of_hashes = []
+                for each_file in files:
+                    hash_md5 = hashlib.md5()
+                    with open(each_file, "rb") as f:
+                        for chunk in iter(lambda: f.read(4096), b""):
+                            hash_md5.update(chunk)
+                    list_of_hashes.append('{}\n'.format(hash_md5.hexdigest()))
+                print("file has been hashed")
+                
+                return list_of_hashes 
+            
+            def write_hashes():
+                hashes = get_hashes()  
+                file_save_path = input("Enter path of the file to save file hashes with filenames: ")
+                with open(file_save_path, 'w') as f:
+                    for md5_hash in hashes:
+                        f.write(md5_hash)
+            
+                print("Hash Saved")
 
-        root.mainloop()
-
+if __name__ == '__main__':
+    VirusTotal_Window().root.mainloop()
