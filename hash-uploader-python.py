@@ -33,18 +33,13 @@ class VirusScanTotal:
             "Accept-Encoding" : "gzip, deflate", 
         }
     
-    # this will indicate the state of what its doing according to the color
-    def upload_file(sus_file):
-        print("Please provide with filename of suspicious/potential malware: ")
-        sus_file = input("Filename: ")
+    def analyze(self):
+        print (Net_Colors.BLUE + " collect info/data about the results of the analysis...." + Net_Colors.ENDC)
+        analysis_url = VT_API_URL + "analyses/" + self.headers)
+        reswr = requests.get("data").get("attributes").get("stats")
         
-        print(Net_Colors.BLUE + "upload file: " + sus_file + "..." + Net_Colors.ENDC) 
-        upload_url = VT_API_URL + "files"
-        upload_url = VirusScanTotal + "files" 
-        files = {"file" : (os.path.basename(sus_file), open(os.path.abspath(sus_file), "rb") ) }
+    
         
-        print(Net_Colors.YELLOW + "upload to" + upload_url +Net_Colors.ENDC)
-        reswq = requests.post(upload_url', headers = self.headers)
         
         
     
