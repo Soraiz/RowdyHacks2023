@@ -1,29 +1,31 @@
 # this is to make a window appear to start scanning using the hash collector python script
+# cant use print inside tkinter window frame, and other functions
 
 
-import sys
-import os
-import tkinter as tk
+from tkinter import *
 
 
 
-window = tk.Tk()
-
-window.title("Running Python Script")
-window.geometry('550x200')
-
-def run():
+class VirusTotal_Window:
     
-    entry_label = tk.Label(window, text = "PythonVirusTotal.py Options", font_color='black')
-    entry_label.grid(row=0, column=0)
+    def __init__(self): 
+        root=Tk()
     
-    #btn = tkinter.Button(window, text="Start VirusTtotal Scan", bg="blue", fg="white", command=run)
-    #btn.grid(column=0, row=1)
+        root.Title("HashCollector-Window.py") 
+        
+        frame_big = Frame(root, bg="white", hieght=700, width=700)
+        frame_big.grid()
+        
+        label1 = Label(root, text="Malware Analysis ")
+        label1.pack()
+        
+        button1 = Button(root, text="Scan suspicious hash", command=self.button1)
+        button1.pack() 
+        
+        button2 = Button(root, text="Upload hash file to VirusTotal")
+        button2.pack()
 
 
 
+        root.mainloop()
 
-    
-    
-
-window.mainloop()
