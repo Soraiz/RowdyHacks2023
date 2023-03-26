@@ -1,8 +1,6 @@
-# this python code is a reserve for uploading hashes to TotalVirus
+# this python code is a rough-draft of the uploader-hash script that will be used
+# the function in this script are to grab the files and upload each hash to VirusTotal and return theur results to indicate which is malicious 
 
-# upload PE file to VirusTotal
-# then get info about the results
-# of analysis, print if maliciou
 
 import os
 import sys
